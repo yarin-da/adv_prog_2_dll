@@ -78,13 +78,13 @@ This can be done easily and with any data structure using these wrapper function
 // return a data structure that contains the timesteps at which an anomaly occurred
 void *Analysis_GetTimeSteps(
   // a detector that could detect and retrieve all of the anomalies
-	void *detector,
+  void *detector,
   // the data to look for anomalies
-	const void *detectTs,
+  const void *detectTs,
   // we are looking specifically for anomalies that are relevant to 'feature'
-	const char *feature,
+  const char *feature,
   // the size of the data structure (i.e. the amount of anomalies we returned)
-	int *size
+  int *size
 );
 
 // simple wrapper function to get the timestep at 'index'
@@ -120,22 +120,22 @@ These next functions will help you do that.
 //    we'll return a data structure that contains (x1, y1, x2, y2)
 void* Analysis_GetFuncData(
   // a detector that can has the values required for the drawing
-	void *detector,
+  void *detector,
   // a timeseries object that contains the data 
   // can be used for determining min/max values
-	void *detectTs,
+  void *detectTs,
   // we want to draw according to 'feature's data
-	const char *feature,
+  const char *feature,
   // the size of the data structure the function returns
-	int *size
+  int *size
 );
 
 // simple wrapper for the data structure to get the value at 'index'
 float Analysis_GetFuncDataAt(
   // a data structure that contains all of the points
-	void* funcData,
+  void* funcData,
   // the index of the value we want
-	int index
+  int index
 );
 
 // deallocate 'funcData'
