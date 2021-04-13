@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "analysis_linear_reg.h"
-/*
+
 // take a csv file, and array of column titles
 // and create a data table using a map<string, vector<float>>
 void* Analysis_CreateTimeSeries(
@@ -132,4 +132,3 @@ void* Analysis_GetFuncData(
 void Analysis_DestroyFuncData(std::vector<float> *funcData) {
 	delete funcData;
 }
-*/

@@ -19,26 +19,40 @@ Circle from2points(Point a, Point b) {
 Circle from3Points(Point a, Point b, Point c) {
 	// find the circumcenter of the triangle a,b,c
 	Point mAB((a.x + b.x) / 2, (a.y + b.y) / 2); // mid point of line AB
-	float slopAB = (b.y - a.y) / (b.x - a.x); // the slop of AB
-	float pSlopAB = -1 / slopAB; // the perpendicular slop of AB
-	// pSlop equation is:
-	// y - mAB.y = pSlopAB * (x - mAB.x) ==> y = pSlopAB * (x - mAB.x) + mAB.y
-
+	float pSlopAB = (a.x - b.x) / (b.y - a.y); // the perpendicular slop of AB
 	Point mBC((b.x + c.x) / 2, (b.y + c.y) / 2); // mid point of line BC
-	float slopBC = (c.y - b.y) / (c.x - b.x); // the slop of BC
-	float pSlopBC = -1 / slopBC; // the perpendicular slop of BC
-	// pSlop equation is:
-	// y - mBC.y = pSlopBC * (x - mBC.x) ==> y = pSlopBC * (x - mBC.x) + mBC.y
+	float pSlopBC = (b.x - c.x) / (c.y - b.y);
+	
+	// if slopes are equal (or both are NaN, i.e. vertical)
+	if ((pSlopAB == pSlopBC) || (pSlopAB != pSlopAB && pSlopBC != pSlopBC)) {
+		float minX = min(a.x, min(b.x, c.x));
+		float maxX = max(a.x, max(b.x, c.x));
+		float x = (minX + maxX) / 2;
+		float minY = min(a.y, min(b.y, c.y));
+		float maxY = max(a.y, max(b.y, c.y));
+		float y = (minY + maxY) / 2;
+		Point center(x, y);
+		float radius = dist(a, center);
+		return Circle(center, radius);
+	}
+	// if only AB is vertical
+	else if (a.y == b.y) {
+		float x = mAB.x;
+		float y = pSlopBC * (x - mBC.x) + mBC.y;
+		Point center(x, y);
+		float radius = dist(a, center);
+		return Circle(center, radius);
+	}
+	// if only BC is vertical
+	else if (b.y == c.y) {
+		float x = mBC.x;
+		float y = pSlopAB * (x - mAB.x) + mAB.y;
+		Point center(x, y);
+		float radius = dist(a, center);
+		return Circle(center, radius);
+	}
 
-	/*
-	pSlopAB * (x - mAB.x) + mAB.y = pSlopBC * (x - mBC.x) + mBC.y
-	pSlopAB*x - pSlopAB*mAB.x + mAB.y = pSlopBC*x - pSlopBC*mBC.x + mBC.y
-
-	x*(pSlopAB - pSlopBC) = - pSlopBC*mBC.x + mBC.y + pSlopAB*mAB.x - mAB.y
-	x = (- pSlopBC*mBC.x + mBC.y + pSlopAB*mAB.x - mAB.y) / (pSlopAB - pSlopBC);
-
-	*/
-
+	// otherwise, the center can be calculated normally
 	float x = (-pSlopBC * mBC.x + mBC.y + pSlopAB * mAB.x - mAB.y) / (pSlopAB - pSlopBC);
 	float y = pSlopAB * (x - mAB.x) + mAB.y;
 	Point center(x, y);

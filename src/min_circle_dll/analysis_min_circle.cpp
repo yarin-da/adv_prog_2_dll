@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "analysis_min_circle.h"
 #include <cmath>
-/*
+
 // take a csv file, and array of column titles
 // and create a data table using a map<string, vector<float>>
 void* Analysis_CreateTimeSeries(
@@ -86,9 +86,7 @@ void* Analysis_GetFuncData(
 		}
 	}
 
-	std::ofstream outfile;
-	outfile.open("test.txt", std::ios_base::app); // append instead of overwrite
-	outfile << feature << " " << centerX << " " << centerY << " " << radius << std::endl;
+	std::cout << feature << " " << centerX << " " << centerY << " " << radius << std::endl;
 
 	const double PI = 3.14159265359;
 	const double MAX_ANGLE = 2 * PI;
@@ -127,4 +125,3 @@ float Analysis_GetFuncDataAt(
 void Analysis_DestroyFuncData(std::vector<float> *funcData) {
 	delete funcData;
 }
-*/

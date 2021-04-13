@@ -2,7 +2,7 @@
 #include <string>
 #include <algorithm>
 #include "CircleAnomalyDetector.h"
-/*
+
 // allocate a timeseries object
 extern "C" __declspec(dllexport)
 void* Analysis_CreateTimeSeries(
@@ -58,4 +58,3 @@ float Analysis_GetFuncDataAt(
 // deallocate the funcData vector
 extern "C" __declspec(dllexport)
 void Analysis_DestroyFuncData(std::vector<float> *funcData);
-*/
